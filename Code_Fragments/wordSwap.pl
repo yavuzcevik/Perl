@@ -3,10 +3,15 @@
 use strict;
 use warnings;
 
+my $string = qx/pwd/;
+chomp ($string);
+qx/cd $string/;
+
 print << "EOF";
           Welcome to Word Swap
 This program aims at swapping words in a text file
 
+Current directory: $string
 Please enter the full path of the text file (e.g. /home/user/text.txt)
 
 EOF

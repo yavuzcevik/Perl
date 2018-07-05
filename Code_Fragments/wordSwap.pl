@@ -3,6 +3,18 @@
 use strict;
 use warnings;
 
+print << "EOF";
+          Welcome to Word Swap
+This program aims at swapping words in a text file
+
+Please enter the full path of the text file (e.g. /home/user/text.txt)
+
+EOF
+
+my $full_path = <STDIN>;
+chomp($full_path);
+open ( my $file, "<", "$full_path" ) or die " Can't open the text file. ($!)\n";
+
 print "Enter the word which you want to change\n";
 my $old_word = <STDIN>;
 chomp($old_word);

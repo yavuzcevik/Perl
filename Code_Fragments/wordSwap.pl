@@ -34,7 +34,7 @@ my $new_word = <STDIN>;
 chomp($new_word);
 
 while (my $line = <$file_read>){
-$line =~ s/$old_word/$new_word/g;
+$line =~ s/\s$old_word\s/ $new_word /g;
 print $file_write $line;
 }
 print "\n New text file "output.txt" created in directory $path \n";

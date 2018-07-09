@@ -14,6 +14,11 @@ Press the number:
 
 EOF
 
+my $path = qx/dirname phoneBook.pl/;
+chomp($path);
+system("touch $path/phoneBook.txt");
+system("chmod 666 $path/phoneBook.txt");
+
 my $choice = <STDIN>;
 
 if ($choice == 1){ 

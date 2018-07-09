@@ -25,7 +25,7 @@ open ( $file_write, ">", "$path/phoneBook.txt" ) or die "Can't open the text fil
 while(<@alphabet>){
 print $file_write "---------- $alphabet[$count] ----------", "\n";
 $count+=1;
-}
+};
 
 my $choice = <STDIN>;
 

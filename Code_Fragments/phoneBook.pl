@@ -20,7 +20,7 @@ system("touch $path/phoneBook.txt");
 system("chmod 666 $path/phoneBook.txt");
 my @alphabet = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 my $count = 0;
-open ( $file_write, ">", "$path/phoneBook.txt" ) or "Can't open the text file for writing ($!)\n";
+open ( $file_write, ">", "$path/phoneBook.txt" ) or die "Can't open the text file for writing ($!)\n";
 
 while(<@alphabet>){
 print $file_write "---------- $alphabet[$count] ----------", "\n";

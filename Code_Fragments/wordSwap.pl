@@ -37,4 +37,7 @@ while (my $line = <$file_read>){
 $line =~ s/\s$old_word\s/ $new_word /g;
 print $file_write $line;
 }
+close $file_read;
+close $file_write;
+
 print "\n New text file "output.txt" created in directory $path \n";

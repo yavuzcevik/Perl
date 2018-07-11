@@ -39,8 +39,11 @@ if ($choice == 1){
 	my $contact_number = <STDIN>;
 	chomp($contact_number);
 	
-	#while(<>){
-	#	if($contact_name_array[0] eq $_){};
+	while(<@alphabet>){
+		if($contact_name_array[0] eq $_){i
+			print $file_write $contact_name, "\n";
+		};	
+	}
 }
 
 elsif($choice == 2){

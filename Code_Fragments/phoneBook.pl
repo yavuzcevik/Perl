@@ -40,7 +40,7 @@ if ($choice == 1){
 	chomp($contact_number);
 	
 	while(<@alphabet>){
-		if($contact_name_array[0] eq $_){i
+		if($contact_name_array[0] eq $_){
 			print $file_write $contact_name, "\n";
 		};	
 	}

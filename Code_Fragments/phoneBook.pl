@@ -7,17 +7,24 @@ use warnings;
 print<<"EOF";
 		Welcome to Phone Book
 
-Press the number:
+EOF
+print "Press the number:\n";
 	
+my $exit = 0;
+while(1){
+if($exit == 1){
+	last;
+}
+print<<"EOF";
 	1 - Add a contact 
 	2 - Search a contact
-
+	3 - Exit
 EOF
 
 my $path = qx/dirname phoneBook.pl/;
 chomp($path);
 
-if(!(-e "$path/phoneBook.txt)){
+if(!(-e "$path/phoneBook.txt")){
 	my @alphabet = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 	my $count = 0;
 	open ( my $file_write, ">", "$path/phoneBook.txt" ) or die "Can't open the text file for writing ($!)\n";
@@ -83,8 +90,14 @@ EOF
 
 
 }
+elsif($choice == 3){
+	print "Exiting\n";
+	$exit = 1;
+	sleep 1;
 
-else {
-print " Please press 1 or 2 \n";
 }
 
+else {
+	print " Please press 1 or 2 \n";
+}
+}

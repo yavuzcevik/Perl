@@ -41,16 +41,23 @@ if ($choice == 1){
 	print "Enter the contact number\n";
 	my $contact_number = <STDIN>;
 	chomp($contact_number);
-	
+	my $flag = 0;
+	open (my $file_write, ">", "$path/newphoneBook.txt" ) or die "Can't open the text file for writing ($!)\n";
 	while(<$file_read>){
+		if($flag == 1){
+			print $file_write "$contact_name	$contact_number", "\n";
+			$.+=1;
+		}
+		$flag = 0;
 		my $letter = $_;
 		chomp($letter);
 		if($contact_name_array[0] eq $letter){
-			open ( my $file_write, ">>", "$path/phoneBook.txt" ) or die "Can't open the text file for writing ($!)\n";
-			print $file_write "$contact_name	$contact_number", "\n";
-			close($file_write);
+			$flag = 1;
 		}	
+		print $file_write $_;
 	}
+	close($file_write);
+	rename("$path/newphoneBook.txt", "$path/phoneBook.txt") or die "Unable to rename: {$!}\n";
 }
 
 elsif($choice == 2){

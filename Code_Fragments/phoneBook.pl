@@ -24,10 +24,10 @@ if(!(-e "$path/phoneBook.txt)){
 	while(<@alphabet>){
 		print $file_write $alphabet[$count], "\n";
 		$count+=1;
-	};
+	}
 	close($file_write);
 	$count = 0;
-};
+}
 
 open ( my $file_read, "<", "$path/phoneBook.txt" ) or die "Can't open the text file for reading ($!)\n";
 my $choice = <STDIN>;
@@ -49,7 +49,7 @@ if ($choice == 1){
 			open ( my $file_write, ">>", "$path/phoneBook.txt" ) or die "Can't open the text file for writing ($!)\n";
 			print $file_write "$contact_name	$contact_number", "\n";
 			close($file_write);
-		};	
+		}	
 	}
 }
 

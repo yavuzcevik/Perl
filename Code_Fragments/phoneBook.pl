@@ -53,7 +53,7 @@ EOF
 		open (my $file_write, ">", "$path/newphoneBook.txt" ) or die "Can't open the text file for writing ($!)\n";
 		while(<$file_read>){
 			if($flag == 1){
-				print $file_write "$contact_name	$contact_number", "\n";
+				print $file_write "$contact_name\t$contact_number", "\n";
 				$.+=1;
 			}
 			$flag = 0;
@@ -65,9 +65,9 @@ EOF
 			print $file_write $_;
 		}
 		close($file_write);
+		close($file_read);
 		rename("$path/newphoneBook.txt", "$path/phoneBook.txt") or die "Unable to rename: {$!}\n";
 	}
-
 	elsif($choice == 2){
 		print<<"EOF";
 Press the number:
@@ -78,13 +78,37 @@ Press the number:
 EOF
 		my $search_choice = <STDIN>;
 		chomp($search_choice);
+		my @element_array;
 
 		if($search_choice == 1){
+			open ( my $file_read, "<", "$path/phoneBook.txt" ) or die "Can't open the text file for reading ($!)\n";
+			print "Please enter the name\n";
+			my $search_name = <STDIN>;
+			$search_name = uc $search_name;	
+			while(<$file_read>){
+				@element_array = split /\t/, $file_read;	
+				print "$element_array[0]\t$element_array[1]\n";	
+				if ($element_array[0] eq $search_name){
+					print "Name: $search_name\n Phone Number:$element_array[1]\n";
+				}
+			}	
+			close($file_read);	
 		}
 
-		elsif($search_choice ==2){
+		elsif($search_choice == 2){
+			open ( my $file_read, "<", "$path/phoneBook.txt" ) or die "Can't open the text file for reading ($!)\n";
+			print "Please enter the number\n";
+			my $search_number = <STDIN>;
+			while(<$file_read>){
+				@element_array = split /\t/, $file_read;	
+				if ($element_array[1] == $search_number){
+					print "Name: $element_array[0]\n Phone Number:$search_number\n";
+				}
+			}	
+			close($file_read);	
 		}
-
+		
+		
 		else {
 		print "Please press 1 or 2 \n";
 		}
@@ -99,6 +123,6 @@ EOF
 	}	
 
 	else {
-		print " Please press 1 or 2 \n";
+		print " Please press 1,2 or 3 \n";
 	}
 }

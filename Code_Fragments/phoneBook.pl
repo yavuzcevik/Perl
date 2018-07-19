@@ -120,7 +120,11 @@ EOF
 	}		
 	
 	elsif($choice == 1){
-	#Show Phone Book
+		open ( my $file_read, "<", "$path/phoneBook.txt" ) or die "Can't open the text file for reading ($!)\n";
+		while(<$file_read>){
+			print "$_";
+		}
+		close($file_read);
 	}
 	
 	elsif($choice == 3){

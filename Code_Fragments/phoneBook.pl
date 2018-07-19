@@ -17,9 +17,11 @@ while(1){
 		last;
 	}
 	print<<"EOF";
-	1 - Add a contact 
-	2 - Search a contact
-	3 - Exit
+	1 - Show Phone Book
+	2 - Add a Contact
+	3 - Delete a Contact 
+	4 - Search a Contact
+	5 - Exit
 EOF
 
 	my $path = qx/dirname phoneBook.pl/;
@@ -40,7 +42,7 @@ EOF
 	open ( my $file_read, "<", "$path/phoneBook.txt" ) or die "Can't open the text file for reading ($!)\n";
 	my $choice = <STDIN>;
 
-	if ($choice == 1){ 
+	if ($choice == 2){ 
 		print "Enter the contact name\n";
 		my $contact_name = <STDIN>;
 		chomp($contact_name);
@@ -68,7 +70,7 @@ EOF
 		close($file_read);
 		rename("$path/newphoneBook.txt", "$path/phoneBook.txt") or die "Unable to rename: {$!}\n";
 	}
-	elsif($choice == 2){
+	elsif($choice == 4){
 		print<<"EOF";
 Press the number:
 	
@@ -86,8 +88,7 @@ EOF
 			my $search_name = <STDIN>;
 			$search_name = uc $search_name;	
 			while(<$file_read>){
-				@element_array = split /\t/, $file_read;	
-				print "$element_array[0]\t$element_array[1]\n";	
+				@element_array = split /\t/, $file_read;		
 				if ($element_array[0] eq $search_name){
 					print "Name: $search_name\n Phone Number:$element_array[1]\n";
 				}
@@ -115,14 +116,22 @@ EOF
 
 
 	}		
+	
+	elsif($choice == 1){
+	#Show Phone Book
+	}
+	
 	elsif($choice == 3){
+	#Delete a Contact
+	}	
+	
+	elsif($choice == 5){
 		print "Exiting\n";
 		$exit = 1;
 		sleep 1;
-
 	}	
 
 	else {
-		print " Please press 1,2 or 3 \n";
+		print " Please press a number from list \n";
 	}
 }

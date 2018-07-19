@@ -62,7 +62,7 @@ EOF
 			$flag = 0;
 			my $letter = $_;
 			chomp($letter);
-			if($contact_name_array[0] eq $letter){
+			if(defined $contact_name_array[0] && $contact_name_array[0] eq $letter){
 				$flag = 1;
 			}	
 			print $file_write $_;
@@ -87,11 +87,12 @@ EOF
 			open ( my $file_read, "<", "$path/phoneBook.txt" ) or die "Can't open the text file for reading ($!)\n";
 			print "Please enter the name\n";
 			my $search_name = <STDIN>;
+			chomp($search_name);
 			$search_name = uc $search_name;	
 			while(<$file_read>){
 				@element_array = split /\t/, $file_read;		
-				if ($element_array[0] eq $search_name){
-					print "Name: $search_name\n Phone Number:$element_array[1]\n";
+				if (defined $element_array[0] && $element_array[0] eq $search_name){
+					print "Name: $element_array[0]\nPhone Number:$element_array[1]\n";
 				}
 			}	
 			close($file_read);	
@@ -103,8 +104,8 @@ EOF
 			my $search_number = <STDIN>;
 			while(<$file_read>){
 				@element_array = split /\t/, $file_read;	
-				if ($element_array[1] == $search_number){
-					print "Name: $element_array[0]\n Phone Number:$search_number\n";
+				if (defined $element_array[1] && $element_array[1] == $search_number){
+					print "Name: $element_array[0]\nPhone Number:$element_array[1]\n";
 				}
 			}	
 			close($file_read);	

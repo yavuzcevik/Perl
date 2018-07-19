@@ -24,7 +24,8 @@ while(1){
 	5 - Exit
 EOF
 
-	my $path = qx/dirname phoneBook.pl/;
+	my $path_tmp = qx/find . | grep phoneBook.pl/;
+	my $path = qx/dirname $path_tmp/;
 	chomp($path);
 
 	if(!(-e "$path/phoneBook.txt")){

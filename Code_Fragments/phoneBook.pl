@@ -40,10 +40,12 @@ EOF
 		$count = 0;
 	}
 
-	open ( my $file_read, "<", "$path/phoneBook.txt" ) or die "Can't open the text file for reading ($!)\n";
+	
 	my $choice = <STDIN>;
 
 	if ($choice == 2){ 
+		#Add a Contact
+		open ( my $file_read, "<", "$path/phoneBook.txt" ) or die "Can't open the text file for reading ($!)\n";
 		print "Enter the contact name\n";
 		my $contact_name = <STDIN>;
 		chomp($contact_name);
@@ -72,6 +74,7 @@ EOF
 		rename("$path/newphoneBook.txt", "$path/phoneBook.txt") or die "Unable to rename: {$!}\n";
 	}
 	elsif($choice == 4){
+		#Search a Contact
 		print<<"EOF";
 Press the number:
 	
@@ -120,6 +123,7 @@ EOF
 	}		
 	
 	elsif($choice == 1){
+		#Show Phone Book
 		open ( my $file_read, "<", "$path/phoneBook.txt" ) or die "Can't open the text file for reading ($!)\n";
 		while(<$file_read>){
 			print "$_";
@@ -129,6 +133,33 @@ EOF
 	
 	elsif($choice == 3){
 	#Delete a Contact
+		print "ATTENTION! YOU CHOSE TO DELETE A CONTACT\n";
+		open ( my $file_read, "<", "$path/phoneBook.txt" ) or die "Can't open the text file for reading ($!)\n";
+		print "Enter the contact name\n";
+		my $contact_name = <STDIN>;
+		chomp($contact_name);
+		$contact_name = uc ($contact_name);
+		print "Enter the contact number\n";
+		my $contact_number = <STDIN>;
+		chomp($contact_number);
+		open (my $file_write, ">", "$path/newphoneBook.txt" ) or die "Can't open the text file for writing ($!)\n";
+		while(<$file_read>){
+			my $letter = $_;
+			chomp($letter);
+			my @contact_array = split /\t/, $letter;
+			if(defined $contact_name_array[0] && defined $contact_array[1] && $contact_array[0] eq $contact_name && $contact_array[1] == $contact_number){
+				print "\nDeleting Contact\n";
+				print "Contact Name : $contact_array[0]\n";
+				print "Contact Number : $contact_array[1]\n\n";
+				sleep 1;
+			}
+			else{
+				print $file_write $_;
+			}
+		}
+		close($file_write);
+		close($file_read);
+		rename("$path/newphoneBook.txt", "$path/phoneBook.txt") or die "Unable to rename: {$!}\n";
 	}	
 	
 	elsif($choice == 5){

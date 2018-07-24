@@ -11,19 +11,24 @@ my $var_random;
 my $var;
 my $count_first;
 my $count_second;
+my $outer_index = 0;
+my $inner_index = 0;
 
 foreach $var_random (@alphabet_random){
-  foreach $var (@alphabet){
-      $count+=1;
-      if ($var_random eq $var){
-        $count_first = $count;
-      }
-      if ($var_random+1 eq $var){
-        $count_second = $count;
-      }
-  if ($count_first > $count_second){
-    ($var_random, $var_random+1) = ($var_random+1, $var_random);
-  }
+	foreach $var (@alphabet){
+      		if ($var_random eq $var){
+       			 $count_first = $count;
+      		}
+      		if ($var_random+1 eq $var){
+			$count_second = $count;
+      		}
+  		if ($count_first > $count_second){
+			($var_random, $var_random+1) = ($var_random+1, $var_random);
+  		}
+		$inner_index += 1;
+	}
+	$outer_index =+ 1;
+	$inner_index = 0;
 }
 
 print "After Sorting: @alphabet_random\n";

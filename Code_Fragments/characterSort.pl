@@ -10,6 +10,7 @@ my $count = 0;
 print "Before Sorting: @alphabet_random\n";
 my $count_first;
 my $count_second;
+my $count_loop_break;
 my $first_loop_iteration_number = 0;
 foreach (@alphabet_random){
 	$count+=1;
@@ -32,11 +33,15 @@ while(1){
 	print "$first_loop_iteration_number. iteration : @alphabet_random\n";
 	qx/sleep 1/;
 	if ($first_loop_iteration_number == $count){
-		$first_loop_iteration_number = 0;
+		if($count_loop_break == 0){
+			last;
+		}
+		else{
+			$first_loop_iteration_number = 0;
+			$count_loop_break = 0;
+		}
 	}
-	else{
-		$first_loop_iteration_number++;
-	}
+	$first_loop_iteration_number++;
 }
 
 print "After Sorting: @alphabet_random\n";

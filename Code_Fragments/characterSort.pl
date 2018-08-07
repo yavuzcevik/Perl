@@ -10,12 +10,12 @@ my $count = 0;
 print "Before Sorting: @alphabet_random\n";
 my $count_first;
 my $count_second;
-
+my $first_loop_iteration_number = 0;
 foreach (@alphabet_random){
 	$count+=1;
 }
 
-for (my $first_loop_iteration_number = 0; $first_loop_iteration_number < $count; $first_loop_iteration_number++){
+while(1){
 	$count_first = 0;
 	$count_second = 0;
 	foreach my $second_loop_iteration_number (0..$count){
@@ -24,14 +24,19 @@ for (my $first_loop_iteration_number = 0; $first_loop_iteration_number < $count;
       		}
       		if ($alphabet_random[$first_loop_iteration_number+1] eq $alphabet[$second_loop_iteration_number]){
        			$count_second = $second_loop_iteration_number;
-      		}
-  		if ($count_first > $count_second){
-			($alphabet_random[$first_loop_iteration_number],$alphabet_random[$first_loop_iteration_number+1]) = ($alphabet_random[$first_loop_iteration_number+1],$alphabet_random[$first_loop_iteration_number]);
-  		}
-		
+      		}	
 	}
+	if ($count_first > $count_second){
+		($alphabet_random[$first_loop_iteration_number],$alphabet_random[$first_loop_iteration_number+1]) = ($alphabet_random[$first_loop_iteration_number+1],$alphabet_random[$first_loop_iteration_number]);
+  	}
 	print "$first_loop_iteration_number. iteration : @alphabet_random\n";
 	qx/sleep 1/;
+	if ($first_loop_iteration_number == $count){
+		$first_loop_iteration_number = 0;
+	}
+	else{
+		$first_loop_iteration_number++;
+	}
 }
 
 print "After Sorting: @alphabet_random\n";

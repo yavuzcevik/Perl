@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+#Created by Halil Yavuz Çevik (20.07.2018)
 
 use strict;
 use warnings;
@@ -7,28 +8,30 @@ my @alphabet = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P',
 my @alphabet_random = ('A','D','N','B','E','F','G','Q','I','J','K','L','M','C','T','P','H','R','S','O','U','V','W','X','Z','Y');
 my $count = 0;
 print "Before Sorting: @alphabet_random\n";
-my $var_random;
-my $var;
 my $count_first;
 my $count_second;
-my $outer_index = 0;
-my $inner_index = 0;
 
-foreach $var_random (@alphabet_random){
-	foreach $var (@alphabet){
-      		if ($var_random eq $var){
-       			 $count_first = $count;
+foreach (@alphabet_random){
+	$count+=1;
+}
+
+for (my $first_loop_iteration_number = 0; $first_loop_iteration_number < $count; $first_loop_iteration_number++){
+	$count_first = 0;
+	$count_second = 0;
+	foreach my $second_loop_iteration_number (0..$count){
+      		if ($alphabet_random[$first_loop_iteration_number] eq $alphabet[$second_loop_iteration_number]){
+       			$count_first = $second_loop_iteration_number;
       		}
-      		if ($var_random+1 eq $var){
-			$count_second = $count;
+      		if ($alphabet_random[$first_loop_iteration_number+1] eq $alphabet[$second_loop_iteration_number]){
+       			$count_second = $second_loop_iteration_number;
       		}
   		if ($count_first > $count_second){
-			($var_random, $var_random+1) = ($var_random+1, $var_random);
+			($alphabet_random[$first_loop_iteration_number],$alphabet_random[$first_loop_iteration_number+1]) = ($alphabet_random[$first_loop_iteration_number+1],$alphabet_random[$first_loop_iteration_number]);
   		}
-		$inner_index += 1;
+		
 	}
-	$outer_index =+ 1;
-	$inner_index = 0;
+	print "$first_loop_iteration_number. iteration : @alphabet_random\n";
+	qx/sleep 1/;
 }
 
 print "After Sorting: @alphabet_random\n";

@@ -30,7 +30,7 @@ EOF
 
 	if(!(-e "$path/phoneBook.txt")){
 		my @alphabet = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-		my @phonebook_sort_array = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+		my @phonebook_sorting_array = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 		my $count = 0;
 		open ( my $file_write, ">", "$path/phoneBook.txt" ) or die "Can't open the text file for writing ($!)\n";
 		while(<@alphabet>){
@@ -52,6 +52,19 @@ EOF
 		chomp($contact_name);
 		$contact_name = uc ($contact_name);
 		my @contact_name_array = split //, $contact_name;
+#----------------------------------------------------------------------------------------------------------------------------
+		#SORTING PART
+		my $given_contact_name_length = 0;
+		my $phonebook_sorting_array_length = 0;
+		#Finding the length of the contact name which is given. We'll use it in the comparaison between
+		#given contact name and a certain name from phonebook sorting array.
+		foreach (@contact_name_array){
+			$given_contact_name_length += 1;
+		}
+		while (1){
+		
+		}
+#----------------------------------------------------------------------------------------------------------------------------
 		print "Enter the contact number\n";
 		my $contact_number = <STDIN>;
 		chomp($contact_number);

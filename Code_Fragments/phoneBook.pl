@@ -27,11 +27,10 @@ EOF
 	my $path_tmp = qx/find . | grep phoneBook.pl/;
 	my $path = qx/dirname $path_tmp/;
 	chomp($path);
-
+	my $count = 0;
+	my @alphabet = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 	if(!(-e "$path/phoneBook.txt")){
-		my @alphabet = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 		my @phonebook_sorting_array = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-		my $count = 0;
 		open ( my $file_write, ">", "$path/phoneBook.txt" ) or die "Can't open the text file for writing ($!)\n";
 		while(<@alphabet>){
 			print $file_write $alphabet[$count], "\n";
@@ -40,8 +39,13 @@ EOF
 		close($file_write);
 		$count = 0;
 	}
-
-	
+	open ( my $file_read_sort, "<", "$path/phoneBook.txt" ) or die "Can't open the text file for writing ($!)\n";
+	my $phonebook_sorting_array_length=0;
+	while(<$file_read_sort>){
+		push(@phonebook_sorting_array, $_);
+		$phonebook_sorting_array_length+=1;
+	}
+	close($file_read_sort);
 	my $choice = <STDIN>;
 
 	if ($choice == 2){ 
@@ -54,15 +58,31 @@ EOF
 		my @contact_name_array = split //, $contact_name;
 #----------------------------------------------------------------------------------------------------------------------------
 		#SORTING PART
-		my $given_contact_name_length = 0;
-		my $phonebook_sorting_array_length = 0;
-		#Finding the length of the contact name which is given. We'll use it in the comparaison between
-		#given contact name and a certain name from phonebook sorting array.
-		foreach (@contact_name_array){
-			$given_contact_name_length += 1;
-		}
+		my $phonebook_element_name_length = 0;
+		my $phonebook_sorting_array_element = 0;
+		my $outer_founded_flag = 0;
+		my $inner_founded_flag = 0;
+		my $alphabet_letter_count = 0;
+		my $contact_name_letter_count = 0;
+		my $phonebook_element_name_letter_count = 0;
+		my $break_addition = 0;
+		my @temp_array;
+		my @temp_array2;
+		my $count_temp;
+		my @phonebook_sorting_array_element_array;
 		while (1){
-		
+			qx/sleep 1/;
+			@temp_array2 = ();
+			@temp_array2 = split '\t', $phonebook_sorting_array[$phonebook_sorting_array_element];
+			chomp(@temp_array2);
+			print "TEMP_ARRAY2 : @temp_array2 \n";
+			@phonebook_sorting_array_element_array =split '', $temp_array2[0];
+			print "SORT_PHONEBOOK : @phonebook_sorting_array_element_array \n";
+			print "SORT GIVEN : @contact_name_array[0] \n";
+			foreach (@phonebook_sorting_array_element_array){
+				$phonebook_element_name_length+=1;
+			}
+			print "Phonebook element name length : $phonebook_element_name_length \n";
 		}
 #----------------------------------------------------------------------------------------------------------------------------
 		print "Enter the contact number\n";

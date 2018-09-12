@@ -57,7 +57,8 @@ EOF
 		$contact_name = uc ($contact_name);
 		my @contact_name_array = split //, $contact_name;
 #----------------------------------------------------------------------------------------------------------------------------
-		#SORTING PART
+#							SORTING PART STARTS
+#----------------------------------------------------------------------------------------------------------------------------
 		my $phonebook_element_name_length = 0;
 		my $phonebook_sorting_array_element = 0;
 		my $outer_founded_flag = 0;
@@ -83,7 +84,48 @@ EOF
 				$phonebook_element_name_length+=1;
 			}
 			print "Phonebook element name length : $phonebook_element_name_length \n";
+			$count_temp = $phonebook_element_name_length;
+			print "liste kelime uzunluğu : $phonebook_element_name_length \n";
+			$phonebook_element_name_length = 0;
+			print "Count temp : $count_temp \n";
+		
+#----------------------------------------------------------------------------------------------------------------------------
+			if($outer_founded_flag == 0){
+				print "Outer Flag Started \n";
+				foreach my $letter_index (0..$count_temp-1){
+				print "------------------------------- \n";
+				print "TEMP ARRAY : @temp_array \n";
+				print "Letter index : $letter_index \n";
+				print "Outer For Started \n";
+				if($inner_founded_flag == 0){
+					print "Inner flag started \n";
+					foreach my $alphabet_letter (@alphabet){
+						print "Inner For Started \n";
+						print "Alphabet letter : $alphabet_letter \n",;
+						print "Contact name array : $contact_name_array[$letter_index]\n";
+						print "Phonebook name array : $phonebook_sorting_array_element_array[$letter_index]\n";
+						if ($contact_name_array[$letter_index] eq $alphabet_letter){
+							print "Contact name letter founded \n";
+							$contact_name_letter_count = $alphabet_letter_count;
+							$break_addition+=1;
+						}
+						if ($phonebook_sorting_array_element_array[$letter_index] eq $alphabet_letter){
+							print "Phonebook name letter founded \n";
+							$phonebook_element_name_letter_count = $alphabet_letter_count;
+							$break_addition+=1;
+						}
+						# When letters are founded, loop must be ended
+						if ($break_addition == 2){
+							$break_addition = 0;
+							$alphabet_letter_count = 0;
+							print "Break \n";
+							last;
+						}
+				}
+			}
 		}
+#----------------------------------------------------------------------------------------------------------------------------
+#							SORTING PART ENDS
 #----------------------------------------------------------------------------------------------------------------------------
 		print "Enter the contact number\n";
 		my $contact_number = <STDIN>;

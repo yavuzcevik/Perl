@@ -29,8 +29,9 @@ EOF
 	chomp($path);
 	my $count = 0;
 	my @alphabet = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+	my @phonebook_sorting_array;
 	if(!(-e "$path/phoneBook.txt")){
-		my @phonebook_sorting_array = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+		@phonebook_sorting_array = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 		open ( my $file_write, ">", "$path/phoneBook.txt" ) or die "Can't open the text file for writing ($!)\n";
 		while(<@alphabet>){
 			print $file_write $alphabet[$count], "\n";
@@ -79,7 +80,7 @@ EOF
 			print "TEMP_ARRAY2 : @temp_array2 \n";
 			@phonebook_sorting_array_element_array =split '', $temp_array2[0];
 			print "SORT_PHONEBOOK : @phonebook_sorting_array_element_array \n";
-			print "SORT GIVEN : @contact_name_array[0] \n";
+			print "SORT GIVEN : $contact_name_array[0] \n";
 			foreach (@phonebook_sorting_array_element_array){
 				$phonebook_element_name_length+=1;
 			}
@@ -278,7 +279,7 @@ EOF
 			my $letter = $_;
 			chomp($letter);
 			my @contact_array = split /\t/, $letter;
-			if(defined $contact_name_array[0] && defined $contact_array[1] && $contact_array[0] eq $contact_name && $contact_array[1] == $contact_number){
+			if(defined $contact_array[0] && defined $contact_array[1] && $contact_array[0] eq $contact_name && $contact_array[1] == $contact_number){
 				print "\nDeleting Contact\n";
 				print "Contact Name : $contact_array[0]\n";
 				print "Contact Number : $contact_array[1]\n\n";

@@ -179,6 +179,10 @@ EOF
 			push(@temp_array, $phonebook_sorting_array[$phonebook_sorting_array_element]);
 			$phonebook_sorting_array_element+=1;
 			print "Temp array : @temp_array \n";
+			if($phonebook_sorting_array_length == $phonebook_sorting_array_element){
+				#If the loop executed after the last element of the list  (after element addition), break.
+				last;
+			}
 		}
 #----------------------------------------------------------------------------------------------------------------------------
 #							SORTING PART ENDS

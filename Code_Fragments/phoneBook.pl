@@ -190,25 +190,33 @@ EOF
 		print "Enter the contact number\n";
 		my $contact_number = <STDIN>;
 		chomp($contact_number);
+#----------------------------------------------------------------------------------------------------------------------------
+#							ADDITION PART STARTS
+#----------------------------------------------------------------------------------------------------------------------------
 		my $flag = 0;
 		open (my $file_write, ">", "$path/newphoneBook.txt" ) or die "Can't open the text file for writing ($!)\n";
-		while(<$file_read>){
-			if($flag == 1){
-				print $file_write "$contact_name\t$contact_number", "\n";
-				$.+=1;
-			}
-			$flag = 0;
-			my $letter = $_;
-			chomp($letter);
-			if(defined $contact_name_array[0] && $contact_name_array[0] eq $letter){
+		foreach my $i (@temp_array){
+			chomp($i);
+			if(defined $contact_name && $contact_name eq $i){
+				#temp arraydeki yeni eklenen elemanı görürse
 				$flag = 1;
 			}	
-			print $file_write $_;
+			if($flag == 1){
+				print $file_write "$i\t$contact_number", "\n";
+			}
+			else {
+				print $file_write $i, "\n";
+			}
+			$flag = 0;
 		}
+		
 		close($file_write);
 		close($file_read);
 		rename("$path/newphoneBook.txt", "$path/phoneBook.txt") or die "Unable to rename: {$!}\n";
 	}
+#----------------------------------------------------------------------------------------------------------------------------
+#							ADDITION PART ENDS
+#----------------------------------------------------------------------------------------------------------------------------
 	elsif($choice == 4){
 		#Search a Contact
 		print<<"EOF";

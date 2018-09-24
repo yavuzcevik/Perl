@@ -72,6 +72,7 @@ EOF
 		my @temp_array2;
 		my $count_temp;
 		my @phonebook_sorting_array_element_array;
+		my $last_element_flag = 0;
 		while (1){
 			qx/sleep 1/;
 			@temp_array2 = ();
@@ -147,6 +148,7 @@ EOF
 							print "A harfi için letter indexten küçük olduğu anında letter index : $letter_index \n";
 							$outer_founded_flag = 1;
 							$inner_founded_flag = 1;
+							$last_element_flag += 1;
 							last;
 						}
 					}
@@ -157,6 +159,7 @@ EOF
 							# Appending given contact name to an temp array
 							# Ya ile Z harfinin karşılaştırılması
 							push(@temp_array, $contact_name);
+							$last_element_flag += 1;
 							$outer_founded_flag = 1;
 							$inner_founded_flag = 1;
 							last;
@@ -181,6 +184,11 @@ EOF
 			print "Temp array : @temp_array \n";
 			if($phonebook_sorting_array_length == $phonebook_sorting_array_element){
 				#If the loop executed after the last element of the list  (after element addition), break.
+				if($last_element_flag == 0){
+					#if input is not added to the phonebook, code assume that input will be the last element of the phonebook (most probably a name starting with "Z")
+					push(@temp_array, $contact_name);
+					$phonebook_sorting_array_length += 1;	
+				}
 				last;
 			}
 		}

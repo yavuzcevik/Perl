@@ -74,45 +74,26 @@ EOF
 		my @phonebook_sorting_array_element_array;
 		my $last_element_flag = 0;
 		while (1){
-			qx/sleep 1/;
 			@temp_array2 = ();
 			@temp_array2 = split '\t', $phonebook_sorting_array[$phonebook_sorting_array_element];
 			chomp(@temp_array2);
-			print "TEMP_ARRAY2 : @temp_array2 \n";
 			@phonebook_sorting_array_element_array =split '', $temp_array2[0];
-			print "SORT_PHONEBOOK : @phonebook_sorting_array_element_array \n";
-			print "SORT GIVEN : $contact_name_array[0] \n";
 			foreach (@phonebook_sorting_array_element_array){
 				$phonebook_element_name_length+=1;
 			}
-			print "Phonebook element name length : $phonebook_element_name_length \n";
 			$count_temp = $phonebook_element_name_length;
-			print "liste kelime uzunluğu : $phonebook_element_name_length \n";
 			$phonebook_element_name_length = 0;
-			print "Count temp : $count_temp \n";
 		
 #----------------------------------------------------------------------------------------------------------------------------
 			if($outer_founded_flag == 0){
-				print "Outer Flag Started \n";
 				foreach my $letter_index (0..$count_temp-1){
-					print "------------------------------- \n";
-					print "TEMP ARRAY : @temp_array \n";
-					print "Letter index : $letter_index \n";
-					print "Outer For Started \n";
 					if($inner_founded_flag == 0){
-						print "Inner flag started \n";
 						foreach my $alphabet_letter (@alphabet){
-							print "Inner For Started \n";
-							print "Alphabet letter : $alphabet_letter \n",;
-							print "Contact name array : $contact_name_array[$letter_index]\n";
-							print "Phonebook name array : $phonebook_sorting_array_element_array[$letter_index]\n";
 							if ($contact_name_array[$letter_index] eq $alphabet_letter){
-								print "Contact name letter founded \n";
 								$contact_name_letter_count = $alphabet_letter_count;
 								$break_addition+=1;
 							}
 							if ($phonebook_sorting_array_element_array[$letter_index] eq $alphabet_letter){
-								print "Phonebook name letter founded \n";
 								$phonebook_element_name_letter_count = $alphabet_letter_count;
 								$break_addition+=1;
 							}
@@ -120,32 +101,23 @@ EOF
 							if ($break_addition == 2){
 								$break_addition = 0;
 								$alphabet_letter_count = 0;
-								print "Break \n";
 								last;
 							}
 							$alphabet_letter_count+=1;
-							print "Inner alphabet letter count : $alphabet_letter_count \n";
-							print "Break addition : $break_addition \n";
 						}
 					}
-					print "Outer alphabet letter count : $alphabet_letter_count \n";
 					$alphabet_letter_count = 0;
 					
 					if($phonebook_element_name_letter_count == $contact_name_letter_count){
 						# Kelimelerin seçilen harfleri aynı ise
 						# Phonebooktaki elemanın bir sonraki harfi yok ise
-						print scalar @phonebook_sorting_array_element_array, "\n";
 						if(scalar @phonebook_sorting_array_element_array < $letter_index+1){
-							print "Next Element \n";
 							last;
 						}
-						print scalar @contact_name_array, "\n";
-						print "Letter index'indeki buffer'ın bir fazlasi : $letter_index+1 \n";
 						# Verilen elemanın bir sonraki harfi yok ise
 						if(scalar @contact_name_array < $letter_index+2){
-							print "Harfler aynı verilen kelime kısa. Verilen kelime eklendir \n";
+							#Harfler aynı verilen kelime kısa. Verilen kelime eklendir
 							push(@temp_array, $contact_name);
-							print "A harfi için letter indexten küçük olduğu anında letter index : $letter_index \n";
 							$outer_founded_flag = 1;
 							$inner_founded_flag = 1;
 							$last_element_flag += 1;
@@ -167,8 +139,6 @@ EOF
 						# Girilen kelimenin ilk harfi sonra geliyor
 						if ($contact_name_letter_count > $phonebook_element_name_letter_count){
 							# Girilen isim Ya harf A ile karşılaştırıldı. Sonraki kelimeye geçilecektir.
-							print "Next element \n";
-							print "@temp_array\n";
 							last;
 						}
 					}
@@ -178,10 +148,8 @@ EOF
 				}
 			}
 #----------------------------------------------------------------------------------------------------------------------------
-			print "Quitting from outer for \n";
 			push(@temp_array, $phonebook_sorting_array[$phonebook_sorting_array_element]);
 			$phonebook_sorting_array_element+=1;
-			print "Temp array : @temp_array \n";
 			if($phonebook_sorting_array_length == $phonebook_sorting_array_element){
 				#If the loop executed after the last element of the list  (after element addition), break.
 				if($last_element_flag == 0){

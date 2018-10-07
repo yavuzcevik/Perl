@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #Created by Halil Yavuz Çevik (20.07.2018)
-# This script sorts given alphabet which is not in order, using Bubble Sort 
+# This script sorts given alphabet which is not in order.
 use strict;
 use warnings;
 

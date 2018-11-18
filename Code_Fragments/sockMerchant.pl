@@ -9,8 +9,6 @@ my $pairCount = 0;
 my $foundFlag = 0;
 my $index = 0;
 while (1){
-	sleep 1;
-	print "n : $n\n";
 	$foundFlag = 0;
 	$index = 0;
 	if( $n == 0){
@@ -21,7 +19,6 @@ while (1){
 		if ( $foundFlag == 1 ){
 			last;
 		}	
-		print "index $index\n";
 		if( $index != 0 && $ar[0] == $_ ){
 		# If the pair of the first element is founded
 			$foundFlag = 1;
@@ -32,8 +29,8 @@ while (1){
 				$n-=2;
 			}
 			else{
+				splice @ar, $index, 1;
 				splice @ar, 0, 1;
-				splice @ar, $_, 1;
 				$pairCount++;
 				$n-=2;
 			}
@@ -45,13 +42,10 @@ while (1){
 		splice @ar, 0, 1;
 		$n--;
 	}
-	
-}
-print "pair count : $pairCount\n";
-
 }
 
-open(my $fptr, '>', $ENV{'OUTPUT_PATH'});
+return $pairCount;	
+}
 
 my $n = <STDIN>;
 $n =~ s/\s+$//;
@@ -59,8 +53,7 @@ $n =~ s/\s+$//;
 my $ar = <STDIN>;
 $ar =~ s/\s+$//;
 my @ar = split /\s+/, $ar;
+
 my $result = sockMerchant $n, @ar;
 
-printf $fptr "$result\n";
-
-close $fptr;
+print "Available pairs for sell : $result\n";

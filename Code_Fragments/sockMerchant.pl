@@ -5,6 +5,7 @@ use warnings;
 sub sockMerchant {
 
 my ($n, @ar) = @_;
+#pairCount: The number of pair of socks in the given array.
 my $pairCount = 0;
 my $foundFlag = 0;
 my $index = 0;
@@ -17,10 +18,12 @@ while (1){
 
 	foreach (@ar){
 		if ( $foundFlag == 1 ){
+		#If a pair is founded, algorithm will start to search once again from beginnig.
+		#So, a break will be implemented after a pair is founded.
 			last;
 		}	
 		if( $index != 0 && $ar[0] == $_ ){
-		# If the pair of the first element is founded
+		# A pair is founded.
 			$foundFlag = 1;
 			if( $n == 2 ){
 				#If last two elements of the array is a pair
@@ -39,6 +42,7 @@ while (1){
 	}
 	
 	if ( $foundFlag == 0 && $n != 0 ){
+	# If the chosen element has no pair, it'll be eleminated.
 		splice @ar, 0, 1;
 		$n--;
 	}

@@ -6,6 +6,7 @@ sub sockMerchant {
 
 my ($n, @ar) = @_;
 #pairCount: The number of pair of socks in the given array.
+my @ar = @{$_[1]};
 my $pairCount = 0;
 my $foundFlag = 0;
 my $index = 0;

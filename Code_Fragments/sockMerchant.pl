@@ -51,9 +51,12 @@ while (1){
 return $pairCount;	
 }
 
+print "Please Enter Socks Count \n"
 my $n = <STDIN>;
 $n =~ s/\s+$//;
 
+print "Please Enter Color Codes of the Socks \n"
+print "Example: 10 20 30 30 20 30 60 10 80 \n"
 my $ar = <STDIN>;
 $ar =~ s/\s+$//;
 my @ar = split /\s+/, $ar;

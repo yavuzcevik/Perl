@@ -62,6 +62,6 @@ my $ar = <STDIN>;
 $ar =~ s/\s+$//;
 my @ar = split /\s+/, $ar;
 
-my $result = sockMerchant $n, @ar;
+my $result = sockMerchant $n, \@ar;
 
 print "Available pairs for sell : $result\n";
